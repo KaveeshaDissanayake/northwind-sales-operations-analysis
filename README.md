@@ -1,5 +1,8 @@
 # Northwind Sales & Operations Analysis | SQL + DuckDB
 
+**Tools:** SQL | DuckDB | DBeaver  
+📄 **[View the complete SQL analysis](northwind_sales_operations_analysis.sql)**
+
 ## Project Overview
 
 This project analyzes the Northwind relational database using SQL and DuckDB to explore customer activity, product demand, supplier relationships, and operational performance.
@@ -21,7 +24,7 @@ This analysis focuses on answering questions such as:
 - Which suppliers provide the widest range of products?
 - Which employees handle the most orders?
 - Which shipping companies handle the highest order volume?
-- Which customer markets are most important to individual employees?
+- Which customer countries account for the highest number of orders handled by each employee?
 
 The goal is to convert relational transaction data into useful business-level insights using SQL.
 
@@ -44,39 +47,36 @@ The main tables used in the analysis are:
 
 The relational structure allows customer, product, supplier, employee, and order data to be analyzed together using SQL joins.
 
+### Database Structure
+
+The database contains multiple related tables connected through primary and foreign keys. These relationships make it possible to combine customer, order, product, supplier, employee, and shipping data for analysis.
+
+![Northwind Database Schema](images/northwind_database_schema.png)
+
 ---
 
-## Tools & SQL Skills
-
-**Tools**
-
-- SQL
-- DuckDB
-- DBeaver
-- MotherDuck
-
-**SQL techniques demonstrated**
+## SQL Skills Demonstrated
 
 - SELECT and filtering
 - INNER JOIN and LEFT JOIN
 - Multi-table joins
 - GROUP BY
 - HAVING
-- Aggregate functions such as COUNT and SUM
+- Aggregate functions such as `COUNT()` and `SUM()`
 - CASE expressions
 - Common Table Expressions (CTEs)
 - Basic window functions
-- RANK()
-- PARTITION BY
-- QUALIFY
+- `RANK()`
+- `PARTITION BY`
+- `QUALIFY`
 
 The complete SQL analysis is available in [`northwind_sales_operations_analysis.sql`](northwind_sales_operations_analysis.sql).
 
 ---
 
-# Analysis & Results
+## Analysis & Results
 
-## 1. Top Customers by Number of Orders
+### 1. Top Customers by Number of Orders
 
 Customer order activity was analyzed by joining the `Customers` and `Orders` tables and counting the number of orders associated with each customer.
 
@@ -87,7 +87,7 @@ Ernst Handel recorded the highest number of orders in the dataset with **10 orde
 
 ---
 
-## 2. Best-Selling Products by Units
+### 2. Best-Selling Products by Units
 
 Product demand was analyzed by joining `Products` with `OrderDetails` and aggregating the total quantity ordered for each product.
 
@@ -98,7 +98,7 @@ Gorgonzola Telino recorded the highest total unit demand with **458 units**, fol
 
 ---
 
-## 3. Product Category Performance
+### 3. Product Category Performance
 
 A multi-table join between `Categories`, `Products`, and `OrderDetails` was used to compare total unit demand across product categories.
 
@@ -111,48 +111,55 @@ This indicates that demand is concentrated more heavily in these categories comp
 
 ---
 
-## 4. Customer Activity Segmentation
+### 4. Customer Activity Segmentation
 
 Customers were segmented according to their order activity using aggregate functions and a `CASE` expression.
 
 ![Customer Segmentation](images/04_customer_segmentation.png)
 
-This analysis demonstrates how SQL can be used not only to retrieve data but also to create business-oriented customer classifications.
+**Result:**  
+Customers were classified into High, Medium, and Low Activity groups based on their total number of orders.
 
-The segmentation thresholds used in this project are analytical assumptions for demonstration purposes rather than company-defined customer segments.
+The segmentation thresholds were selected for demonstration purposes after reviewing the order-count distribution and do not represent company-defined customer segments.
+
+This analysis demonstrates how SQL can be used not only to retrieve data but also to create business-oriented customer classifications.
 
 ---
 
-## 5. Employee and Customer-Market Analysis
+### 5. Employee and Customer-Market Analysis
 
 This analysis identifies the customer country from which each employee handled the highest number of orders.
 
-To solve this, I first created an intermediate result set using a **Common Table Expression (CTE)** to calculate the number of orders handled by each employee for each customer country. I then used a **window function** with `RANK()`, `PARTITION BY`, and DuckDB's `QUALIFY` clause to rank countries separately for each employee and return only the top-ranked country.
+To solve this, I first created an intermediate result set using a **Common Table Expression (CTE)** to calculate the number of orders handled by each employee for each customer country.
 
-### Query
+I then used a **window function** with `RANK()`, `PARTITION BY`, and DuckDB's `QUALIFY` clause to rank countries separately for each employee and return only the top-ranked country.
+
+#### Query
 
 ![Employee Country Analysis Query](images/05_employee_country_analysis_query.png)
 
-### Result
+#### Result
 
 ![Employee Country Analysis Result](images/06_employee_country_analysis_result.png)
 
 **Result:**  
-This analysis shows the top customer country handled by each employee based on order count. It demonstrates the use of multi-table joins, aggregation, CTEs, and basic window functions to solve a business-focused ranking problem.
+The analysis identifies the customer country associated with the highest order count for each employee.
+
+This demonstrates the use of multi-table joins, aggregation, CTEs, and basic window functions to solve a business-focused ranking problem.
 
 ---
 
-# Key Findings
+## Key Findings
 
 - Ernst Handel was the most active customer by number of orders.
 - Gorgonzola Telino recorded the highest product unit demand.
 - Dairy Products, Beverages, and Confections were the three highest-volume product categories.
 - Customer order activity varies considerably, allowing customers to be grouped into different activity segments.
-- Multi-table relational analysis makes it possible to connect customer, product, employee, supplier, and operational information to answer business questions.
+- Employee-level market analysis identifies the customer country contributing the highest order count for each employee.
 
 ---
 
-# Limitations
+## Limitations
 
 This analysis has several limitations:
 
@@ -163,19 +170,21 @@ This analysis has several limitations:
 
 ---
 
-# Next Steps
+## Next Steps
 
 Future improvements to this project could include:
 
+- Adding date-based analysis to identify monthly and seasonal order trends.
 - Expanding the analysis using additional CTEs and window functions.
-- Adding date-based analysis to identify monthly or seasonal order trends.
-- Performing additional customer and product ranking analysis.
 - Running the analysis in MotherDuck as a cloud-based DuckDB workflow.
-- Creating reusable SQL views for frequently used business metrics.
-- Connecting the SQL analysis to Power BI to create an interactive dashboard.
+- Connecting the SQL analysis to Power BI to build an interactive dashboard.
 
 ---
 
 ## Author
-**Kaveesha Dissanayake**
+
+**Kaveesha Dissanayake**  
 Aspiring Data Analyst | Power BI | SQL | Excel
+
+- [LinkedIn](https://www.linkedin.com/in/kaveesha-dissanayake-data-analyst/)
+- [GitHub](https://github.com/KaveeshaDissanayake/)
