@@ -125,12 +125,20 @@ The segmentation thresholds used in this project are analytical assumptions for 
 
 ## 5. Employee and Customer-Market Analysis
 
-A Common Table Expression (CTE) and window function were used to identify the customer country from which each employee handled the highest number of orders.
+This analysis identifies the customer country from which each employee handled the highest number of orders.
 
-![Employee Country Analysis](images/05_employee_country_analysis.png)
-![Employee Country Analysis](images/06_employee_country_analysis.png)
+To solve this, I first created an intermediate result set using a **Common Table Expression (CTE)** to calculate the number of orders handled by each employee for each customer country. I then used a **window function** with `RANK()`, `PARTITION BY`, and DuckDB's `QUALIFY` clause to rank countries separately for each employee and return only the top-ranked country.
 
-The analysis uses `RANK()`, `PARTITION BY`, and DuckDB's `QUALIFY` functionality to rank customer countries separately for each employee.
+### Query
+
+![Employee Country Analysis Query](images/05_employee_country_analysis_query.png)
+
+### Result
+
+![Employee Country Analysis Result](images/06_employee_country_analysis_result.png)
+
+**Result:**  
+This analysis shows the top customer country handled by each employee based on order count. It demonstrates the use of multi-table joins, aggregation, CTEs, and basic window functions to solve a business-focused ranking problem.
 
 ---
 
