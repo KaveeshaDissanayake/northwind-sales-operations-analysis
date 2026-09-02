@@ -115,7 +115,7 @@ This indicates that demand is concentrated more heavily in these categories comp
 
 Customers were segmented according to their order activity using aggregate functions and a `CASE` expression.
 
-![Customer Segmentation](images/05_customer_segmentation.png)
+![Customer Segmentation](images/04_customer_segmentation.png)
 
 This analysis demonstrates how SQL can be used not only to retrieve data but also to create business-oriented customer classifications.
 
@@ -127,6 +127,7 @@ The segmentation thresholds used in this project are analytical assumptions for 
 
 A Common Table Expression (CTE) and window function were used to identify the customer country from which each employee handled the highest number of orders.
 
+![Employee Country Analysis](images/05_employee_country_analysis.png)
 ![Employee Country Analysis](images/06_employee_country_analysis.png)
 
 The analysis uses `RANK()`, `PARTITION BY`, and DuckDB's `QUALIFY` functionality to rank customer countries separately for each employee.
@@ -169,8 +170,4 @@ Future improvements to this project could include:
 
 ## Author
 **Kaveesha Dissanayake**
-Aspiring Data Analyst | Power BI | SQL | Excel
-
-**Kaveesha Dissanayake**
-
 Aspiring Data Analyst | Power BI | SQL | Excel
